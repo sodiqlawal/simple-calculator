@@ -181,16 +181,16 @@
 				let history = getHistory();
 				
 				if(output.length == 0) {
-					output = "0."
-				}else{
-					if (output.indexOf(".") == -1){
-						output += ".";
-					} 
-					
+					output = Number("0.");
+				}else {if (output.indexOf(".") == -1){
+						output += ".";		
 				}
-
+	
+			}
 				printOutput(output);
 			}
+
+
 			if(this.id =="backspace"){
 				let output = reverseNumberFormat(getOutput()).toString();
 				if(output){// if output has a value
