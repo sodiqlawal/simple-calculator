@@ -106,7 +106,7 @@
 				<button class="operator" id="clear">C</button>
 				<button class="operator" id="backspace">CE</button>
 				<button class="operator" id="%">%</button>
-				<button class="number" id="sin">Sin&Theta;</button>
+				<button class="operator" id="sin">Sin&Theta;</button>
 				<button class="operator" id="/">&#247;</button>
 				<button class="number" id="7">7</button>
 				<button class="number" id="8">8</button>
@@ -171,24 +171,47 @@
 				printHistory("");
 				printOutput("");
 			};
-			// if (this.id == "sin"){
-			// 	let output = reverseNumberFormat(getOutput()).
-			// 	let sine = Math.sin(output);
-			// 	printOutput(sine);
-			// };
-			if(this.id == "."){
+			if (this.id == "sin"){
+				// let sine = document.getElementById("sin").innerText;
 				let output = getOutput();
-				let history = getHistory();
-				
-				if(output.length == 0) {
-					output = Number("0.");
-				}else {if (output.indexOf(".") == -1){
-						output += ".";		
+				if (output == Number){
+				 output = output + this.id;
 				}
-	
-			}
+				if (output.indexOf("sin") == 0){
+					return Math.sin(output);
+				}
 				printOutput(output);
-			}
+				} 
+
+			if (this.id == "cos"){
+				// let sine = document.getElementById("sin").innerText;
+				let output = getOutput();
+				if (output == Number){
+				 output = output + this.id;
+				}
+				if (output.indexOf("cos") == 0){
+					return Math.cos(output);
+				}
+				printOutput(output);
+				} 
+
+
+				if (this.id == "."){
+					let output = getOutput();
+					let history = getHistory();
+
+					if (output.length == 0){
+						output = Number("0.");
+					}else if (output.indexOf(".") == -1){
+						output += ".";
+					} if(history.includes(".")){
+						// return document.getElementById(".").innerText = "";
+						let dot = document.getElementById(".").innerText;
+							dot = "";
+							return history = output + dot;
+					}
+					printOutput(output);
+				}
 
 
 			if(this.id =="backspace"){
