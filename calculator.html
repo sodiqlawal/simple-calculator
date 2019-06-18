@@ -53,7 +53,7 @@
 			font-weight: bold;
 			font-size: 15px;
 		}
-		.number, .empty, #dot, #less, #great{
+		.number, .empty{
 			background-color: #eaedef;	
 		}
 		.number, .operator {
@@ -84,6 +84,10 @@
 		button:nth-child(25) {
 			font-size: 20px;
 			background-color: #9477af;
+		}
+		.equal {
+			width: 50%;
+			background-color: lightblue;
 		}
 	</style>
 </head>
@@ -125,9 +129,7 @@
 				<button class="operator" id="+">+</button>
 				<button class="operator" id=".">.</button>
 				<button class="number" id="0">0</button>
-				<button class="operator" id="less">(</button>
-				<button class="operator" id="great">)</button>
-				<button class="operator" id="=">=</button>
+				<button class="operator equal" id="=">=</button>
 
 			</div>
 		</div>
@@ -177,9 +179,9 @@
 				if (output == Number){
 				 output = output + this.id;
 				}
-				if (output.indexOf("sin") == 0){
-					return Math.sin(output);
-				}
+				// if (output.indexOf("sin") == 0){
+				// 	return Math.sin(output);
+				// }
 				printOutput(output);
 				} 
 
@@ -212,6 +214,7 @@
 					}
 					printOutput(output);
 				}
+
 
 
 			if(this.id =="backspace"){
