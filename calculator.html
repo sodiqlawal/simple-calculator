@@ -110,17 +110,17 @@
 				<button class="operator" id="clear">C</button>
 				<button class="operator" id="backspace">CE</button>
 				<button class="operator" id="%">%</button>
-				<button class="operator" id="sin">Sin&Theta;</button>
+				<button class="operator" id="sin">Sin</button>
 				<button class="operator" id="/">&#247;</button>
 				<button class="number" id="7">7</button>
 				<button class="number" id="8">8</button>
 				<button class="number" id="9">9</button>
-				<button class="operator" id="cos">Cos&Theta;</button>
+				<button class="operator" id="cos">Cos</button>
 				<button class="operator" id="*">&times;</button>
 				<button class="number" id="4">4</button>
 				<button class="number" id="5">5</button>
 				<button class="number" id="6">6</button>
-				<button class="operator" id="tan">Tan&Theta;</button>
+				<button class="operator" id="tan">Tan</button>
 				<button class="operator" id="-">-</button>
 				<button class="number" id="1">1</button>
 				<button class="number" id="2">2</button>
@@ -173,17 +173,34 @@
 				printHistory("");
 				printOutput("");
 			};
-			if (this.id == "sin"){
-				// let sine = document.getElementById("sin").innerText;
-				let output = getOutput();
-				if (output == Number){
-				 output = output + this.id;
+			// if (this.id == "sin"){
+			// 	let sinNum = document.getElementsByClassName("number").innerText;
+			// 	let output = getOutput();
+			// 	if (output == Number){
+			// 	 output = output + this.id;
+			// 	if (output !=""&&history!=""){
+			// 		if (history.includes("sin") && history.includes(Number)){
+			// 			return Number * (Math.sin(output));										
+			// 		}		
+			// 	}	
+			// 	}
+
+			// 	printOutput(output);
+			// 	} 
+
+			if(this.id == 'sin'){
+				let history = getHistory();
+				let output = getOutput()
+				let sine = document.getElementById("sin");
+				return sine.addEventListener("click", function (){
+					 // return history = output + this.id;
+					printHistory(output + this.id);
+				})
+				if (history.indexOf("sin") == 0 && output == Number){
+					history = Number(Math.sin(output));
+					};
+					printOutput(history);
 				}
-				// if (output.indexOf("sin") == 0){
-				// 	return Math.sin(output);
-				// }
-				printOutput(output);
-				} 
 
 			if (this.id == "cos"){
 				// let sine = document.getElementById("sin").innerText;
@@ -196,7 +213,6 @@
 				}
 				printOutput(output);
 				} 
-
 
 				if (this.id == "."){
 					let output = getOutput();
@@ -236,6 +252,7 @@
 					output = output ==""? output:reverseNumberFormat(output);
 					history = history + output;
 					if (this.id == "="){
+						console.log(history, ' History');
 						let result = eval(history);
 						printOutput(result);
 						printHistory("");
