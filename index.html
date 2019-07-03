@@ -192,14 +192,40 @@
 				let history = getHistory();
 				let output = getOutput()
 				let sine = document.getElementById("sin");
-				return sine.addEventListener("click", function (){
-					 // return history = output + this.id;
-					printHistory(output + this.id);
-				})
-				if (history.indexOf("sin") == 0 && output == Number){
-					history = Number(Math.sin(output));
+				// return sine.addEventListener("click", function (){
+				// 	 // return history = output + this.id;
+				// 	 history = this.id + output;
+				// 	printHistory(history);
+				// })
+				// if (history.indexOf("sin") >= 0 && output === Number){
+				// 	output = Number(output);
+				// 	history = Number(Math.sin(output));
+				// 	};
+				// 	printOutput(history);
+
+				let sin = 'Math.sin',
+					num = {
+						Numbers: [0,1,2,3,4,5,6,7,8,9]
 					};
-					printOutput(history);
+				localStorage.setItem('sin', sin);
+				localStorage.setItem('numbers', JSON.stringify(num));
+				let getSin = localStorage.getItem('sin');
+				let getNum = JSON.parse(localStorage.getItem('numbers'));
+				localStorage.removeItem('sin');
+				let getNumbers = getNum.Numbers;
+
+				for(let i=0; i<getNumbers.length; i++){
+				let sine = document.getElementById("sin");
+				let numValue = getNumbers[i];
+					if (output == numValue){
+						sine.addEventListener("click", function(){
+							let ans = getSin(getNum);
+							return document.getElementById("output-value").innerText= ans;
+						})
+						
+					} 
+				}
+
 				}
 
 			if (this.id == "cos"){
