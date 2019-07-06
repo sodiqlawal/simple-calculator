@@ -43,7 +43,7 @@
 		#keyboard {
 			height: 400px;
 		}
-		.operator, .number, .empty{
+		.operator, .number, .empty, .scient{
 			width: 50px;
 			height: 50px;
 			margin: 15px;
@@ -56,13 +56,13 @@
 		.number, .empty{
 			background-color: #eaedef;	
 		}
-		.number, .operator {
+		.number, .operator, .scient {
 			cursor: pointer;
 		}
-		.operator:active, .number:active{
+		.operator:active, .number:active, .scient:active{
 			font-size: 13px;
 		}
-		.operator:focus, .number:focus, .empty:focus{
+		.operator:focus, .number:focus, .empty:focus, .scient:focus{
 			outline: 0;
 		}
 		button:nth-child(5) {
@@ -110,22 +110,22 @@
 				<button class="operator" id="clear">C</button>
 				<button class="operator" id="backspace">CE</button>
 				<button class="operator" id="%">%</button>
-				<button class="operator" id="sin">Sin</button>
+				<button class="scient" id="sin">Sin</button>
 				<button class="operator" id="/">&#247;</button>
 				<button class="number" id="7">7</button>
 				<button class="number" id="8">8</button>
 				<button class="number" id="9">9</button>
-				<button class="operator" id="cos">Cos</button>
+				<button class="scient" id="cos">Cos</button>
 				<button class="operator" id="*">&times;</button>
 				<button class="number" id="4">4</button>
 				<button class="number" id="5">5</button>
 				<button class="number" id="6">6</button>
-				<button class="operator" id="tan">Tan</button>
+				<button class="scient" id="tan">Tan</button>
 				<button class="operator" id="-">-</button>
 				<button class="number" id="1">1</button>
 				<button class="number" id="2">2</button>
 				<button class="number" id="3">3</button>
-				<button class="operator" id="log">Log</button>
+				<button class="scient" id="log">Log</button>
 				<button class="operator" id="+">+</button>
 				<button class="operator" id=".">.</button>
 				<button class="number" id="0">0</button>
@@ -153,7 +153,6 @@
 		}
 	}
 
-
 	function getFormattedNumber(num){
 		if(num == "-"){
 			return "";
@@ -166,6 +165,64 @@
 	function reverseNumberFormat(num) {
 		return Number(num.replace(/,/g,''));
 	}
+
+	const scient = document.getElementsByClassName("scient");
+	for (let i=0; i<scient.length; i++){
+  		scient[i].addEventListener("click", function(){
+   			if (this.id === "sin"){
+     			let output = getOutput();
+      			let history = getHistory();
+      		   if (output != "" && history.length == 0 || history.length != ""){
+      		   	let sine = document.getElementById("sin");
+      		   	sine.addEventListener("click", function(){
+      		   		let outVal = document.getElementById("output-value").innerText;
+      		   		output =  Math.sin(outVal);
+      		   		printOutput(output);
+      		   	}) 	
+      		   }
+   			} ;
+
+   			if (this.id === "cos"){
+     			let output = getOutput();
+      			let history = getHistory();
+      		   if (output != "" && history.length == 0){
+      		   	let sine = document.getElementById("cos");
+      		   	sine.addEventListener("click", function(){
+      		   		let outVal = document.getElementById("output-value").innerText;
+      		   		output =  Math.cos(outVal);
+      		   		printOutput(output);
+      		   	}) 	
+      		   }
+   			} ;
+
+   			if (this.id === "tan"){
+     			let output = getOutput();
+      			let history = getHistory();
+      		   if (output != "" && history.length == 0){
+      		   	let sine = document.getElementById("tan");
+      		   	sine.addEventListener("click", function(){
+      		   		let outVal = document.getElementById("output-value").innerText;
+      		   		output =  Math.tan(outVal);
+      		   		printOutput(output);
+      		   	}) 	
+      		   }
+   			} ;
+
+   			if (this.id === "log"){
+     			let output = getOutput();
+      			let history = getHistory();
+      		   if (output != "" && history.length == 0){
+      		   	let sine = document.getElementById("log");
+      		   	sine.addEventListener("click", function(){
+      		   		let outVal = document.getElementById("output-value").innerText;
+      		   		output =  Math.log(outVal);
+      		   		printOutput(output);
+      		   	}) 	
+      		   }
+   			} ;
+ 			})
+		};
+
 	const operator = document.getElementsByClassName("operator");
 	for (let i= 0; i<operator.length; i++){
 		operator[i].addEventListener("click", function(){
@@ -173,72 +230,6 @@
 				printHistory("");
 				printOutput("");
 			};
-			// if (this.id == "sin"){
-			// 	let sinNum = document.getElementsByClassName("number").innerText;
-			// 	let output = getOutput();
-			// 	if (output == Number){
-			// 	 output = output + this.id;
-			// 	if (output !=""&&history!=""){
-			// 		if (history.includes("sin") && history.includes(Number)){
-			// 			return Number * (Math.sin(output));										
-			// 		}		
-			// 	}	
-			// 	}
-
-			// 	printOutput(output);
-			// 	} 
-
-			if(this.id == 'sin'){
-				let history = getHistory();
-				let output = getOutput()
-				let sine = document.getElementById("sin");
-				// return sine.addEventListener("click", function (){
-				// 	 // return history = output + this.id;
-				// 	 history = this.id + output;
-				// 	printHistory(history);
-				// })
-				// if (history.indexOf("sin") >= 0 && output === Number){
-				// 	output = Number(output);
-				// 	history = Number(Math.sin(output));
-				// 	};
-				// 	printOutput(history);
-
-				let sin = 'Math.sin',
-					num = {
-						Numbers: [0,1,2,3,4,5,6,7,8,9]
-					};
-				localStorage.setItem('sin', sin);
-				localStorage.setItem('numbers', JSON.stringify(num));
-				let getSin = localStorage.getItem('sin');
-				let getNum = JSON.parse(localStorage.getItem('numbers'));
-				localStorage.removeItem('sin');
-				let getNumbers = getNum.Numbers;
-
-				for(let i=0; i<getNumbers.length; i++){
-				let sine = document.getElementById("sin");
-				let numValue = getNumbers[i];
-					if (output == numValue){
-						sine.addEventListener("click", function(){
-							let ans = getSin(getNum);
-							return document.getElementById("output-value").innerText= ans;
-						})
-						
-					} 
-				}
-
-				}
-
-			if (this.id == "cos"){
-				// let sine = document.getElementById("sin").innerText;
-				let output = getOutput();
-				if (output == Number){
-				 output = output + this.id;
-				}
-				if (output.indexOf("cos") == 0){
-					return Math.cos(output);
-				}
-				printOutput(output);
-				} 
 
 				if (this.id == "."){
 					let output = getOutput();
@@ -256,8 +247,6 @@
 					}
 					printOutput(output);
 				}
-
-
 
 			if(this.id =="backspace"){
 				let output = reverseNumberFormat(getOutput()).toString();
@@ -303,6 +292,8 @@
 
 		})
 	}
+
+
 </script>
 </body>
 </html>
